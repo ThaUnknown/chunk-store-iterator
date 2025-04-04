@@ -50,10 +50,10 @@ async function chunkStoreWrite (store, stream, opts = {}) {
   let ended = false
 
   for await (const chunk of blockIterator(stream, chunkLength, { zeroPadding: opts.zeroPadding || false })) {
-    await new Promise(resolve => {
+    await new Promise((resolve, reject) => {
       if (outstandingPuts++ <= storeMaxOutstandingPuts) resolve()
       store.put(index++, chunk, err => {
-        if (err) throw err
+        if (err) return reject(err)
         --outstandingPuts
         resolve()
         if (ended && outstandingPuts === 0) cb()

@@ -1,6 +1,6 @@
 {
   "name": "chunk-store-iterator",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Convert an abstract-chunk-store compliant store into an async iterator, or write to using an async iterator.",
   "main": "index.js",
   "dependencies": {
